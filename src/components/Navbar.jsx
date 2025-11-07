@@ -4,20 +4,19 @@ import { AppContext } from '../contextApi/ContextApi';
 
 
 const Navbar = () => {
-  const {token, setToken} = useContext(AppContext);
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(token != null);
+ const { token, setToken } = useContext(AppContext);
+ const navigate = useNavigate();
 
+ const isLoggedIn = !!token; // derived from context directly
 
-  const handleAuthToggle = () => {
-    if(isLoggedIn == false) {
-        navigate('/login');
-    } else {
-      localStorage.removeItem("JWT_TOKEN");
-      setToken(null);
-    }
-    setIsLoggedIn(!isLoggedIn)
-  };
+ const handleAuthToggle = () => {
+   if (!isLoggedIn) {
+     navigate("/login");
+   } else {
+     localStorage.removeItem("JWT_TOKEN");
+     setToken(null);
+   }
+ };
 
   return (
     <nav className="bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-md">

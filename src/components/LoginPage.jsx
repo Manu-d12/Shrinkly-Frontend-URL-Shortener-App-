@@ -33,7 +33,7 @@ export default function LoginPage() {
         );
         console.log(response.token);
         localStorage.setItem('JWT_TOKEN', response.token);
-        setToken(response.setToken);
+        setToken(response.token);
         navigate("/");
         toast.success("Login Success")
         reset();
