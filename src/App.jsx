@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import SignupForm from './components/SignupForm';
 import { Toaster } from 'react-hot-toast';
 import LoginPage from './components/LoginPage';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/about" element={<AboutPage/>}></Route>
           <Route path="/register" element={<SignupForm/>}></Route>
           <Route path="/login" element={<LoginPage/>}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>

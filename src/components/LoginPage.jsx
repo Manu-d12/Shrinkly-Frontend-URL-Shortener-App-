@@ -24,17 +24,16 @@ export default function LoginPage() {
 
 
   const onSubmit = async (data) => {
-      debugger;
       setLoader(true);
       try {
         const {data : response} = await api.post(
-          'http://localhost:9090/api/auth/login',
+          '/api/auth/login',
           data
         );
         console.log(response.token);
         localStorage.setItem('JWT_TOKEN', response.token);
         setToken(response.token);
-        navigate("/");
+        navigate("/dashboard");
         toast.success("Login Success")
         reset();
       } catch (error) {

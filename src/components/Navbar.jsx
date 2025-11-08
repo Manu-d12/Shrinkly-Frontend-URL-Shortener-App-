@@ -15,6 +15,7 @@ const Navbar = () => {
    } else {
      localStorage.removeItem("JWT_TOKEN");
      setToken(null);
+     navigate('/');
    }
  };
 
