@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-6 px-8">
+    <footer className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-6 px-8 mt-auto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold">Shrinkly</h2>
@@ -13,7 +13,8 @@ const Footer = () => {
         </div>
 
         <div className="text-sm text-center md:text-right">
-          © {new Date().getFullYear()} <span className="font-semibold">Shrinkly</span>. All rights reserved.
+          © {new Date().getFullYear()}{" "}
+          <span className="font-semibold">Shrinkly</span>. All rights reserved.
         </div>
 
         <div className="flex space-x-4 text-lg">
