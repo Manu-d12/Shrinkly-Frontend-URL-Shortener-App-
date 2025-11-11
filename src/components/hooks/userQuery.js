@@ -46,7 +46,7 @@ export const useFetchUrlSpecificClicks = (token, onError) => {
         }, 
         {
             select : ({data}) => {
-                data.sort((a, b) => new Date(a.createdDate - b.createdDate));
+                data.sort((a, b) => new Date(b.createdDate) - new Date(a.createdDate));
                 return data;
             },
             onError,

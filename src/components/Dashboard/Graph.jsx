@@ -11,25 +11,39 @@ import {
   Legend,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const Graph = ({ data }) => {
   const chartData = {
-    labels: data.length === 0 ? ["", "", "", "", "", "", "", "", ""] : data.map((item) => item.date),
+    labels:
+      data.length === 0
+        ? ["", "", "", "", "", "", "", "", ""]
+        : data.map((item) => item.date),
     datasets: [
       {
         label: "Total Clicks",
-        data: data.length === 0 ? [1, 2, 3, 4, 5, 4, 3, 2, 1] : data.map((item) => item.clickCount),
-        backgroundColor: data.length === 0 ? '#f2f7f7' : "rgba(37, 99, 235, 0.7)", 
+        data:
+          data.length === 0
+            ? [1, 2, 3, 4, 5, 4, 3, 2, 1]
+            : data.map((item) => item.clickCount),
+        backgroundColor:
+          data.length === 0 ? "#f2f7f7" : "rgba(37, 99, 235, 0.7)",
         borderRadius: 5,
-        barThickness : 20
+        barThickness: 20,
       },
     ],
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, 
+    maintainAspectRatio: false,
     plugins: {
       legend: { position: "top" },
       title: { display: false },

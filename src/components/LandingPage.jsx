@@ -1,14 +1,21 @@
 import React, { useContext } from 'react';
 import Card from './Card';
+import {AppContext} from '../contextApi/ContextApi'
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+
+  const {token} = useContext(AppContext);
+  const navigate = useNavigate();
 
      const handleClick = (e) => {
         const dataId = e.target.getAttribute('data-id')
         if(dataId === 'create-short-link') {
-            console.log(1);
+           if(token != null) navigate('/dashboard')
+           else navigate('/login')
         } else {
-            console.log(2);
+            if(token != null) navigate('/dashboard')
+            else navigate('/login')
         }
      }
 
@@ -31,12 +38,14 @@ const LandingPage = () => {
 
           <div className="flex gap-4">
             <button
+              data-id='create-short-link'
               className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all"
               onClick={handleClick}
             >
               Create Short Link
             </button>
             <button
+              data-id='manage-links'
               className="px-6 py-3 border border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-semibold rounded-xl transition-all"
               onClick={handleClick}
             >

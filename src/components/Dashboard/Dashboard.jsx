@@ -7,8 +7,10 @@ import {
 } from "../../components/hooks/userQuery";
 import Graph from "./Graph";
 import ShortenUrlModal from "./ShortUrlModal";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate(); 
   const [shortenUrlPop, setShortenUrlPop] = useState(false);
   const { token } = useContext(AppContext);
   const { data, error, isLoading } = useFetchTotalClicks(token, onError);
@@ -28,6 +30,7 @@ const Dashboard = () => {
 
   function onError(e) {
     console.log("ERROR IN DATA FETCHING FROM BACKEND!!!");
+    navigate('/error');
   }
 
   return (
@@ -68,7 +71,7 @@ const Dashboard = () => {
         )}
       </div>
       <ShortenUrlModal
-        refetech={refetch}
+        refetch={refetch}
         open={shortenUrlPop}
         setOpen={setShortenUrlPop}
       ></ShortenUrlModal>

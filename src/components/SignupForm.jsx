@@ -40,6 +40,7 @@ export default function SignupForm() {
       } catch (error) {
         console.log(error);
         toast.error("Registeration Failed")
+        navigate('/error');
       } finally {
         setLoader(false);
       }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { MdAnalytics,MdContentCopy } from "react-icons/md";
-import AnalyticsModal from "./AnalyticsModal"
+import { MdAnalytics, MdContentCopy } from "react-icons/md";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import AnalyticsModal from "./AnalyticsModal";
 import toast from "react-hot-toast";
 
 const ITEMS_PER_PAGE = 5;
@@ -8,7 +9,6 @@ const ITEMS_PER_PAGE = 5;
 const ShortenUrlTable = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [shortUrl, setShortUrl] = useState(null);
-
 
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -20,10 +20,12 @@ const ShortenUrlTable = ({ data }) => {
 
   const copyUrlHandler = (e) => {
     const shortUrl = e.target.getAttribute("data-id");
-  navigator.clipboard.writeText(import.meta.env.VITE_SHRINKLY_SUBDOMAIN_URL + '/' + shortUrl).then(() => {
-      toast.success("Copied Successfully")
-    })
-  }
+    navigator.clipboard
+      .writeText(import.meta.env.VITE_SHRINKLY_SUBDOMAIN_URL + "/" + shortUrl)
+      .then(() => {
+        toast.success("Copied Successfully");
+      });
+  };
 
   const analyticsHandler = (e) => {
     const shortUrl = e.target.getAttribute("data-id");
@@ -57,19 +59,11 @@ const ShortenUrlTable = ({ data }) => {
               {currentItems.length > 0 ? (
                 currentItems.map((item) => (
                   <tr key={item.id} className="hover:bg-indigo-50 transition">
-                    <td className="px-4 py-3 text-blue-600 font-medium hover:underline">
-                      <a
-                        href={
-                          import.meta.env.VITE_SHRINKLY_SUBDOMAIN_URL +
-                          "/" +
-                          item.shortUrl
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {import.meta.env.VITE_SHRINKLY_SUBDOMAIN_URL}/
-                        {item.shortUrl}
-                      </a>
+                    <td className="px-4 py-3 text-blue-600 font-medium">
+                      <div className="flex items-center">
+                        <span className="mr-2">{item.shortUrl}</span>
+                        <a target="_blank" href={import.meta.env.VITE_SHRINKLY_SUBDOMAIN_URL + '/' + item.shortUrl}><FaExternalLinkAlt /></a>
+                      </div>
                     </td>
                     <td className="px-4 py-3 truncate max-w-xs">
                       {item.originalUrl}
@@ -82,7 +76,7 @@ const ShortenUrlTable = ({ data }) => {
                     </td>
                     <td className="px-4 py-3 text-gray-500">
                       <button
-                        style={{cursor:"pointer"}}
+                        style={{ cursor: "pointer" }}
                         data-id={item.shortUrl}
                         onClick={copyUrlHandler}
                         className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 rounded-md text-gray-700 text-sm font-medium hover:bg-gray-100 active:scale-95 transition"

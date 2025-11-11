@@ -39,6 +39,12 @@ const Navbar = () => {
           >
             About
           </a>
+          {token && ( <a
+            href="/dashboard"
+            className="hover:text-blue-200 transition-colors duration-200 font-medium"
+          >
+            Dashboard
+          </a>)}
           <button
             onClick={handleAuthToggle}
             className="bg-white text-indigo-600 font-semibold px-4 py-2 rounded-full hover:bg-indigo-100 transition-all duration-300"

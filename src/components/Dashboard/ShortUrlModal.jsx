@@ -13,6 +13,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import api from "../api/api";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ShortenUrlModal = ({ open, setOpen, refetch }) => {
   const [longUrl, setLongUrl] = useState("");
@@ -20,6 +21,7 @@ const ShortenUrlModal = ({ open, setOpen, refetch }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const { token } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,7 @@ const ShortenUrlModal = ({ open, setOpen, refetch }) => {
     } catch (err) {
       console.error(err);
       setError(true);
+      navigate('/error');
     } finally {
       setLoading(false);
     }
@@ -57,13 +60,13 @@ const ShortenUrlModal = ({ open, setOpen, refetch }) => {
     });
   }
   
-  const popupCloseHandler = () => {
+  const popupCloseHandler = async () => {
     setLoading(false);
     setLongUrl("");
     setError(false);
     setShortUrl("");
     setOpen(false);
-    // await refetch(); commenting for now, later it will refresh the list..... when pop is closed.... (need to refetch if some-url is created else no-need)
+    await refetch();
   };
 
   return (
@@ -81,7 +84,6 @@ const ShortenUrlModal = ({ open, setOpen, refetch }) => {
           p: 4,
         }}
       >
-        {/* Header Row with Title and Close Button */}
         <Box
           display="flex"
           justifyContent="space-between"
@@ -99,7 +101,6 @@ const ShortenUrlModal = ({ open, setOpen, refetch }) => {
           </Tooltip>
         </Box>
 
-        {/* Form */}
         <form onSubmit={handleSubmit}>
           <TextField
             label="Enter Long URL"
