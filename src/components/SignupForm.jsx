@@ -28,19 +28,20 @@ export default function SignupForm() {
   const onSubmit = async (data) => {
       setLoader(true);
       try {
-        // http://localhost:9090/api/auth/register
         const {data : response} = await api.post(
-          'http://localhost:9090/api/auth/register',
+          '/api/auth/register',
           data
         );
-        console.log("BACKED_RESPONSE: ", response);
         reset();
         toast.success("Registeration Successfull")
         navigate("/login");
       } catch (error) {
-        console.log(error);
-        toast.error("Registeration Failed")
-        navigate('/error');
+        const httpStatus = error?.response?.status;
+        if(httpStatus === 409) {
+          toast.error("username or email already in use")
+        } else {
+          navigate('/error');
+        }
       } finally {
         setLoader(false);
       }
@@ -61,7 +62,13 @@ export default function SignupForm() {
           label="Username"
           placeholder="John Doe"
           control={control}
-          rules={{ required: "Username is required" }}
+          rules={{ 
+            required: "Username is required",
+            pattern: {
+              value: /^[A-Za-z0-9_]{4,}$/,
+              message: "Invalid username",
+            },
+          }}
         />
 
         <CustomField

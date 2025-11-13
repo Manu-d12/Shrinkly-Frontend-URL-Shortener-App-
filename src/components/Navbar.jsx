@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+      <div style={{width : "90%"}} className="mx-auto px-6 py-3 flex justify-between items-center">
         <h1 className="text-2xl font-bold tracking-wide cursor-pointer">
           <Link to="/" > Shrinkly </Link> 
         </h1>

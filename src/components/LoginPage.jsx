@@ -37,9 +37,12 @@ export default function LoginPage() {
         toast.success("Login Success")
         reset();
       } catch (error) {
-        console.log(error);
-        toast.error("Registeration Failed")
-        navigate('/error');
+        const httpStatus = error?.response?.status;
+        if(httpStatus === 404) {
+          toast.error("invalid username or password")
+        } else {
+          navigate('/error');
+        }
       } finally {
         setLoader(false);
       }

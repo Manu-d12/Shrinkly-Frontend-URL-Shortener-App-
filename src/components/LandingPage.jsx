@@ -1,29 +1,35 @@
-import React, { useContext } from 'react';
-import Card from './Card';
-import {AppContext} from '../contextApi/ContextApi'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import Card from "./Card";
+import { AppContext } from "../contextApi/ContextApi";
+import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 
 const LandingPage = () => {
-
-  const {token} = useContext(AppContext);
+  const { token } = useContext(AppContext);
   const navigate = useNavigate();
 
-     const handleClick = (e) => {
-        const dataId = e.target.getAttribute('data-id')
-        if(dataId === 'create-short-link') {
-           if(token != null) navigate('/dashboard')
-           else navigate('/login')
-        } else {
-            if(token != null) navigate('/dashboard')
-            else navigate('/login')
-        }
-     }
+  const handleClick = (e) => {
+    const dataId = e.target.getAttribute("data-id");
+    if (dataId === "create-short-link") {
+      if (token != null) navigate("/dashboard");
+      else navigate("/login");
+    } else {
+      if (token != null) navigate("/dashboard");
+      else navigate("/login");
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-white to-gray-50 text-gray-800">
-      <section className="flex flex-col md:flex-row items-center justify-center md:justify-between px-8 md:px-16 py-20 bg-white">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -40 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+      className="min-h-screen bg-linear-to-b from-white to-gray-50 text-gray-800"
+    >
+      <section className="flex flex-col-reverse md:flex-row items-center justify-between px-6 md:px-16 py-16 bg-white overflow-hidden">
         {/* Left content */}
-        <div className="md:basis-3/5 max-w-2xl md:mr-6">
+        <div className="md:basis-3/5 max-w-2xl text-center md:text-left mt-10 md:mt-0">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
             <span className="text-indigo-600">Shrinkly</span> — The Smarter,
             Faster, & Secure Way to{" "}
@@ -36,16 +42,16 @@ const LandingPage = () => {
             platform.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <button
-              data-id='create-short-link'
+              data-id="create-short-link"
               className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg transition-all"
               onClick={handleClick}
             >
               Create Short Link
             </button>
             <button
-              data-id='manage-links'
+              data-id="manage-links"
               className="px-6 py-3 border border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-semibold rounded-xl transition-all"
               onClick={handleClick}
             >
@@ -55,11 +61,11 @@ const LandingPage = () => {
         </div>
 
         {/* Right image */}
-        <div className="relative mt-12 md:mt-0 md:-ml-10">
+        <div className="flex justify-center md:justify-end w-full md:w-auto relative">
           <img
-            src="src\assets\Shrinkly3.png"
+            src="src/assets/ShrinklyLogo.png"
             alt="Shrinkly 3D Logo"
-            className="sm:w-[520px] w-[440px] object-contain drop-shadow-xl"
+            className="w-[320px] sm:w-[400px] md:w-[480px] lg:w-[520px] object-contain transform rotate-6 -translate-y-4 md:-translate-y-6 md:-translate-x-6 drop-shadow-2xl transition-all duration-700 hover:rotate-3 hover:-translate-y-2"
           />
         </div>
       </section>
@@ -92,7 +98,7 @@ const LandingPage = () => {
           />
         </div>
       </section>
-    </div>
+    </motion.div>
   );
 };
 
